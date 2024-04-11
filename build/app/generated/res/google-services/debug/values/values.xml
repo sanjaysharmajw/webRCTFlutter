@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_web_client_id" translatable="false">591377579749-fjml4t2ljv42t2u7ourgcfc6uah3vflv.apps.googleusercontent.com</string>
-    <string name="gcm_defaultSenderId" translatable="false">591377579749</string>
-    <string name="google_api_key" translatable="false">AIzaSyCKfsDqOV7MoXXLKHOBk3ogDiHKBnPO1ZU</string>
-    <string name="google_app_id" translatable="false">1:591377579749:android:9d572a353d6bbe33edde0c</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCKfsDqOV7MoXXLKHOBk3ogDiHKBnPO1ZU</string>
-    <string name="google_storage_bucket" translatable="false">fe-webrtc-tutorial-1b19d.appspot.com</string>
-    <string name="project_id" translatable="false">fe-webrtc-tutorial-1b19d</string>
+    <string name="gcm_defaultSenderId" translatable="false">349668000886</string>
+    <string name="google_api_key" translatable="false">AIzaSyBXG-S0x5EHDMCWvKtvCnR541kDuwq462k</string>
+    <string name="google_app_id" translatable="false">1:349668000886:android:f4e4c5a20a2ca039cd8b57</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBXG-S0x5EHDMCWvKtvCnR541kDuwq462k</string>
+    <string name="google_storage_bucket" translatable="false">webrtc-d0770.appspot.com</string>
+    <string name="project_id" translatable="false">webrtc-d0770</string>
 </resources>
