@@ -1,0 +1,20 @@
+dev.flutterexplained.webrtc_tutorial.app-jetified-window-1.0.0-beta04-0 /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/res
+dev.flutterexplained.webrtc_tutorial.app-jetified-window-java-1.0.0-beta04-1 /Users/sanjaysharma/.gradle/caches/transforms-3/2cd42c421c5fcc666c6d478b9d0f93cc/transformed/jetified-window-java-1.0.0-beta04/res
+dev.flutterexplained.webrtc_tutorial.app-jetified-play-services-base-18.0.1-2 /Users/sanjaysharma/.gradle/caches/transforms-3/32dbb57a76a26ea3fd4575a4c674ce2e/transformed/jetified-play-services-base-18.0.1/res
+dev.flutterexplained.webrtc_tutorial.app-jetified-firebase-common-20.3.2-3 /Users/sanjaysharma/.gradle/caches/transforms-3/4ed8bcd41b26fbe90aa68fa676e9be37/transformed/jetified-firebase-common-20.3.2/res
+dev.flutterexplained.webrtc_tutorial.app-core-1.6.0-4 /Users/sanjaysharma/.gradle/caches/transforms-3/5c8a81cf2eef89498ff1a72fe119bcdb/transformed/core-1.6.0/res
+dev.flutterexplained.webrtc_tutorial.app-jetified-annotation-experimental-1.1.0-5 /Users/sanjaysharma/.gradle/caches/transforms-3/e8991c05e5aa97ef430aee779507bef9/transformed/jetified-annotation-experimental-1.1.0/res
+dev.flutterexplained.webrtc_tutorial.app-jetified-play-services-basement-18.1.0-6 /Users/sanjaysharma/.gradle/caches/transforms-3/ffab2070c030f6a84e69ea898e188aa5/transformed/jetified-play-services-basement-18.1.0/res
+dev.flutterexplained.webrtc_tutorial.app-debug-7 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/debug/res
+dev.flutterexplained.webrtc_tutorial.app-main-8 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/res
+dev.flutterexplained.webrtc_tutorial.app-google-services-9 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/app/generated/res/google-services/debug
+dev.flutterexplained.webrtc_tutorial.app-pngs-10 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/app/generated/res/pngs/debug
+dev.flutterexplained.webrtc_tutorial.app-resValues-11 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/app/generated/res/resValues/debug
+dev.flutterexplained.webrtc_tutorial.app-rs-12 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/app/generated/res/rs/debug
+dev.flutterexplained.webrtc_tutorial.app-mergeDebugResources-13 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir
+dev.flutterexplained.webrtc_tutorial.app-mergeDebugResources-14 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/app/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+dev.flutterexplained.webrtc_tutorial.app-merged_res-15 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/app/intermediates/merged_res/debug
+dev.flutterexplained.webrtc_tutorial.app-packaged_res-16 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/cloud_firestore/intermediates/packaged_res/debug
+dev.flutterexplained.webrtc_tutorial.app-packaged_res-17 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/firebase_core/intermediates/packaged_res/debug
+dev.flutterexplained.webrtc_tutorial.app-packaged_res-18 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/flutter_webrtc/intermediates/packaged_res/debug
+dev.flutterexplained.webrtc_tutorial.app-packaged_res-19 /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/path_provider_android/intermediates/packaged_res/debug
