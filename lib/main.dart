@@ -315,7 +315,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
               left: _isRemoteFullScreen ? 0 : _remoteViewLeft,
               right: _isRemoteFullScreen ? 0 : null,
               bottom: _isRemoteFullScreen ? 0 : null,
-              width: _isRemoteFullScreen ? null : 120,
+              width: _isRemoteFullScreen ? null : 150,
               height: _isRemoteFullScreen ? null : 200,
               child: Stack(
                 children: [
@@ -362,7 +362,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                           padding: EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             color: Colors.black54,
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           child: Icon(
                             _remoteVideoOn ? Icons.videocam : Icons.videocam_off,
@@ -376,7 +376,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                           padding: EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             color: Colors.black54,
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           child: Icon(
                             _remoteAudioOn ? Icons.mic : Icons.mic_off,
