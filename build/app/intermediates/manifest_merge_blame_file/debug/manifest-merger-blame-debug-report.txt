@@ -13,31 +13,31 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:11:5-66
-15-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:11:22-64
+15-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:11:5-66
+15-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:11:22-64
 16
 17    <uses-feature android:name="android.hardware.camera" />
-17-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:4:5-60
-17-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:4:19-57
+17-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:4:5-60
+17-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:4:19-57
 18    <uses-feature android:name="android.hardware.camera.autofocus" />
-18-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:5:5-70
-18-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:5:19-67
+18-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:5:5-70
+18-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:5:19-67
 19
 20    <uses-permission android:name="android.permission.CAMERA" />
-20-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:6:5-65
-20-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:6:22-62
+20-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:6:5-65
+20-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:6:22-62
 21    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-21-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:7:5-71
-21-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:7:22-68
+21-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:7:5-71
+21-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:7:22-68
 22    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-22-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:8:5-79
-22-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:8:22-76
+22-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:8:5-79
+22-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:8:22-76
 23    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-23-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:9:5-79
-23-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:9:22-76
+23-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:9:5-79
+23-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:9:22-76
 24    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-24-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:10:5-80
-24-->/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/AndroidManifest.xml:10:22-77
+24-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:10:5-80
+24-->/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/AndroidManifest.xml:10:22-77
 25    <uses-permission
 25-->[com.twilio:audioswitch:1.1.7] /Users/sanjaysharma/.gradle/caches/transforms-3/e66e84c0d066066c03614956cd3d3c4b/transformed/jetified-audioswitch-1.1.7/AndroidManifest.xml:9:5-11:38
 26        android:name="android.permission.BLUETOOTH"
@@ -89,74 +89,92 @@
 67            android:value="2" />
 68
 69        <service
-69-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+69-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
 70            android:name="com.google.firebase.components.ComponentDiscoveryService"
-70-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
+70-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
 71            android:directBootAware="true"
-71-->[com.google.firebase:firebase-common:20.3.2] /Users/sanjaysharma/.gradle/caches/transforms-3/4ed8bcd41b26fbe90aa68fa676e9be37/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:34:13-43
+71-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:32:13-43
 72            android:exported="false" >
-72-->[com.google.firebase:firebase-firestore:24.5.0] /Users/sanjaysharma/.gradle/caches/transforms-3/20322fbd26890cdbb75558db02cc29af/transformed/jetified-firebase-firestore-24.5.0/AndroidManifest.xml:18:13-37
+72-->[com.google.firebase:firebase-firestore:24.9.1] /Users/sanjaysharma/.gradle/caches/transforms-3/3617a54eaf2770a295cfc8c5495106f1/transformed/jetified-firebase-firestore-24.9.1/AndroidManifest.xml:16:13-37
 73            <meta-data
-73-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+73-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 74                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
-74-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
+74-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
 75                android:value="com.google.firebase.components.ComponentRegistrar" />
-75-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+75-->[:cloud_firestore] /Users/sanjaysharma/Documents/Personal/webRCTFlutter/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 76            <meta-data
-76-->[:firebase_core] /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+76-->[:firebase_core] /Users/sanjaysharma/Documents/Personal/webRCTFlutter/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 77                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-77-->[:firebase_core] /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+77-->[:firebase_core] /Users/sanjaysharma/Documents/Personal/webRCTFlutter/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 78                android:value="com.google.firebase.components.ComponentRegistrar" />
-78-->[:firebase_core] /Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+78-->[:firebase_core] /Users/sanjaysharma/Documents/Personal/webRCTFlutter/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 79            <meta-data
-79-->[com.google.firebase:firebase-firestore:24.5.0] /Users/sanjaysharma/.gradle/caches/transforms-3/20322fbd26890cdbb75558db02cc29af/transformed/jetified-firebase-firestore-24.5.0/AndroidManifest.xml:19:13-21:85
-80                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-80-->[com.google.firebase:firebase-firestore:24.5.0] /Users/sanjaysharma/.gradle/caches/transforms-3/20322fbd26890cdbb75558db02cc29af/transformed/jetified-firebase-firestore-24.5.0/AndroidManifest.xml:20:17-111
+79-->[com.google.firebase:firebase-firestore:24.9.1] /Users/sanjaysharma/.gradle/caches/transforms-3/3617a54eaf2770a295cfc8c5495106f1/transformed/jetified-firebase-firestore-24.9.1/AndroidManifest.xml:17:13-19:85
+80                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
+80-->[com.google.firebase:firebase-firestore:24.9.1] /Users/sanjaysharma/.gradle/caches/transforms-3/3617a54eaf2770a295cfc8c5495106f1/transformed/jetified-firebase-firestore-24.9.1/AndroidManifest.xml:18:17-122
 81                android:value="com.google.firebase.components.ComponentRegistrar" />
-81-->[com.google.firebase:firebase-firestore:24.5.0] /Users/sanjaysharma/.gradle/caches/transforms-3/20322fbd26890cdbb75558db02cc29af/transformed/jetified-firebase-firestore-24.5.0/AndroidManifest.xml:21:17-82
-82        </service>
-83
-84        <uses-library
-84-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
-85            android:name="androidx.window.extensions"
-85-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
-86            android:required="false" />
-86-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
-87        <uses-library
-87-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
-88            android:name="androidx.window.sidecar"
-88-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
-89            android:required="false" />
-89-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
-90
-91        <provider
-91-->[com.google.firebase:firebase-common:20.3.2] /Users/sanjaysharma/.gradle/caches/transforms-3/4ed8bcd41b26fbe90aa68fa676e9be37/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:25:9-30:39
-92            android:name="com.google.firebase.provider.FirebaseInitProvider"
-92-->[com.google.firebase:firebase-common:20.3.2] /Users/sanjaysharma/.gradle/caches/transforms-3/4ed8bcd41b26fbe90aa68fa676e9be37/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:26:13-77
-93            android:authorities="dev.flutterexplained.webrtc_tutorial.firebaseinitprovider"
-93-->[com.google.firebase:firebase-common:20.3.2] /Users/sanjaysharma/.gradle/caches/transforms-3/4ed8bcd41b26fbe90aa68fa676e9be37/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:27:13-72
-94            android:directBootAware="true"
-94-->[com.google.firebase:firebase-common:20.3.2] /Users/sanjaysharma/.gradle/caches/transforms-3/4ed8bcd41b26fbe90aa68fa676e9be37/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:28:13-43
-95            android:exported="false"
-95-->[com.google.firebase:firebase-common:20.3.2] /Users/sanjaysharma/.gradle/caches/transforms-3/4ed8bcd41b26fbe90aa68fa676e9be37/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:29:13-37
-96            android:initOrder="100" />
-96-->[com.google.firebase:firebase-common:20.3.2] /Users/sanjaysharma/.gradle/caches/transforms-3/4ed8bcd41b26fbe90aa68fa676e9be37/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:30:13-36
-97
-98        <activity
-98-->[com.google.android.gms:play-services-base:18.0.1] /Users/sanjaysharma/.gradle/caches/transforms-3/32dbb57a76a26ea3fd4575a4c674ce2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
-99            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-99-->[com.google.android.gms:play-services-base:18.0.1] /Users/sanjaysharma/.gradle/caches/transforms-3/32dbb57a76a26ea3fd4575a4c674ce2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
-100            android:exported="false"
-100-->[com.google.android.gms:play-services-base:18.0.1] /Users/sanjaysharma/.gradle/caches/transforms-3/32dbb57a76a26ea3fd4575a4c674ce2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
-101            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-101-->[com.google.android.gms:play-services-base:18.0.1] /Users/sanjaysharma/.gradle/caches/transforms-3/32dbb57a76a26ea3fd4575a4c674ce2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
-102
-103        <meta-data
-103-->[com.google.android.gms:play-services-basement:18.1.0] /Users/sanjaysharma/.gradle/caches/transforms-3/ffab2070c030f6a84e69ea898e188aa5/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
-104            android:name="com.google.android.gms.version"
-104-->[com.google.android.gms:play-services-basement:18.1.0] /Users/sanjaysharma/.gradle/caches/transforms-3/ffab2070c030f6a84e69ea898e188aa5/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
-105            android:value="@integer/google_play_services_version" />
-105-->[com.google.android.gms:play-services-basement:18.1.0] /Users/sanjaysharma/.gradle/caches/transforms-3/ffab2070c030f6a84e69ea898e188aa5/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
-106    </application>
-107
-108</manifest>
+81-->[com.google.firebase:firebase-firestore:24.9.1] /Users/sanjaysharma/.gradle/caches/transforms-3/3617a54eaf2770a295cfc8c5495106f1/transformed/jetified-firebase-firestore-24.9.1/AndroidManifest.xml:19:17-82
+82            <meta-data
+82-->[com.google.firebase:firebase-firestore:24.9.1] /Users/sanjaysharma/.gradle/caches/transforms-3/3617a54eaf2770a295cfc8c5495106f1/transformed/jetified-firebase-firestore-24.9.1/AndroidManifest.xml:20:13-22:85
+83                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+83-->[com.google.firebase:firebase-firestore:24.9.1] /Users/sanjaysharma/.gradle/caches/transforms-3/3617a54eaf2770a295cfc8c5495106f1/transformed/jetified-firebase-firestore-24.9.1/AndroidManifest.xml:21:17-111
+84                android:value="com.google.firebase.components.ComponentRegistrar" />
+84-->[com.google.firebase:firebase-firestore:24.9.1] /Users/sanjaysharma/.gradle/caches/transforms-3/3617a54eaf2770a295cfc8c5495106f1/transformed/jetified-firebase-firestore-24.9.1/AndroidManifest.xml:22:17-82
+85            <meta-data
+85-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/969f6a1d05bc7cff0400d0dfd13c3bdf/transformed/jetified-firebase-common-ktx-20.4.2/AndroidManifest.xml:12:13-14:85
+86                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+86-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/969f6a1d05bc7cff0400d0dfd13c3bdf/transformed/jetified-firebase-common-ktx-20.4.2/AndroidManifest.xml:13:17-116
+87                android:value="com.google.firebase.components.ComponentRegistrar" />
+87-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/969f6a1d05bc7cff0400d0dfd13c3bdf/transformed/jetified-firebase-common-ktx-20.4.2/AndroidManifest.xml:14:17-82
+88            <meta-data
+88-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:35:13-37:85
+89                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+89-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:36:17-109
+90                android:value="com.google.firebase.components.ComponentRegistrar" />
+90-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:37:17-82
+91        </service>
+92
+93        <provider
+93-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:23:9-28:39
+94            android:name="com.google.firebase.provider.FirebaseInitProvider"
+94-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:24:13-77
+95            android:authorities="dev.flutterexplained.webrtc_tutorial.firebaseinitprovider"
+95-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:25:13-72
+96            android:directBootAware="true"
+96-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:26:13-43
+97            android:exported="false"
+97-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:27:13-37
+98            android:initOrder="100" />
+98-->[com.google.firebase:firebase-common:20.4.2] /Users/sanjaysharma/.gradle/caches/transforms-3/ddf9925fc69599af9069f4c271a1eecd/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:28:13-36
+99
+100        <uses-library
+100-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+101            android:name="androidx.window.extensions"
+101-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+102            android:required="false" />
+102-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+103        <uses-library
+103-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+104            android:name="androidx.window.sidecar"
+104-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+105            android:required="false" />
+105-->[androidx.window:window:1.0.0-beta04] /Users/sanjaysharma/.gradle/caches/transforms-3/1f3f3c7bf247259442b6db1757087228/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+106
+107        <activity
+107-->[com.google.android.gms:play-services-base:18.0.1] /Users/sanjaysharma/.gradle/caches/transforms-3/32dbb57a76a26ea3fd4575a4c674ce2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+108            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+108-->[com.google.android.gms:play-services-base:18.0.1] /Users/sanjaysharma/.gradle/caches/transforms-3/32dbb57a76a26ea3fd4575a4c674ce2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+109            android:exported="false"
+109-->[com.google.android.gms:play-services-base:18.0.1] /Users/sanjaysharma/.gradle/caches/transforms-3/32dbb57a76a26ea3fd4575a4c674ce2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+110            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+110-->[com.google.android.gms:play-services-base:18.0.1] /Users/sanjaysharma/.gradle/caches/transforms-3/32dbb57a76a26ea3fd4575a4c674ce2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+111
+112        <meta-data
+112-->[com.google.android.gms:play-services-basement:18.1.0] /Users/sanjaysharma/.gradle/caches/transforms-3/ffab2070c030f6a84e69ea898e188aa5/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+113            android:name="com.google.android.gms.version"
+113-->[com.google.android.gms:play-services-basement:18.1.0] /Users/sanjaysharma/.gradle/caches/transforms-3/ffab2070c030f6a84e69ea898e188aa5/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+114            android:value="@integer/google_play_services_version" />
+114-->[com.google.android.gms:play-services-basement:18.1.0] /Users/sanjaysharma/.gradle/caches/transforms-3/ffab2070c030f6a84e69ea898e188aa5/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+115    </application>
+116
+117</manifest>

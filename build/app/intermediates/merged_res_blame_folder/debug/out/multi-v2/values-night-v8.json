@@ -4,7 +4,7 @@
             "outputFile": "dev.flutterexplained.webrtc_tutorial.app-mergeDebugResources-13:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/sanjaysharma/Documents/Personal/Personal Projects/WebRTC Flutter/webRCTFlutter/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/sanjaysharma/Documents/Personal/webRCTFlutter/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
