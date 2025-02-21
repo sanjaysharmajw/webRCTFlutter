@@ -330,8 +330,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                           final screenHeight = MediaQuery.of(context).size.height;
                           const viewWidth = 150.0;
                           const viewHeight = 200.0;
-                          _remoteViewTop = _remoteViewTop.clamp(
-                              0.0, screenHeight - viewHeight - AppBar().preferredSize.height);
+                          _remoteViewTop = _remoteViewTop.clamp(0.0, screenHeight - viewHeight - AppBar().preferredSize.height);
                           _remoteViewLeft = _remoteViewLeft.clamp(0.0, screenWidth - viewWidth);
                         });
                       },
