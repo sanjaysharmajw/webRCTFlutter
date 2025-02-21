@@ -292,206 +292,207 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Video Call App')),
-      body: Stack(
-        children: [
-          // Local Video View (shown when not in fullscreen remote mode)
-          if (!_isRemoteFullScreen)
-            Positioned.fill(
-              child: GestureDetector(
-                onDoubleTap: () => _toggleFullScreen(true),
-                child: RTCVideoView(
-                  _localRenderer,
-                  objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
-                ),
-              ),
-            ),
-
-          // Remote Video View with Status Indicators
-          if (_remoteRenderer.srcObject != null)
-            Positioned(
-              top: _isRemoteFullScreen ? 0 : _remoteViewTop,
-              left: _isRemoteFullScreen ? 0 : _remoteViewLeft,
-              right: _isRemoteFullScreen ? 0 : null,
-              bottom: _isRemoteFullScreen ? 0 : null,
-              width: _isRemoteFullScreen ? null : 150,
-              height: _isRemoteFullScreen ? null : 200,
-              child: Stack(
-                children: [
-                  GestureDetector(
-                    onPanUpdate: _isRemoteFullScreen
-                        ? null
-                        : (details) {
-                      setState(() {
-                        _remoteViewTop += details.delta.dy;
-                        _remoteViewLeft += details.delta.dx;
-                        final screenWidth = MediaQuery.of(context).size.width;
-                        final screenHeight = MediaQuery.of(context).size.height;
-                        const viewWidth = 120.0;
-                        const viewHeight = 200.0;
-                        _remoteViewTop = _remoteViewTop.clamp(
-                            0.0, screenHeight - viewHeight - AppBar().preferredSize.height);
-                        _remoteViewLeft = _remoteViewLeft.clamp(0.0, screenWidth - viewWidth);
-                      });
-                    },
-                    onTap: () => _toggleFullScreen(false),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: _isRemoteFullScreen ? null : BorderRadius.circular(10),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: _isRemoteFullScreen
-                            ? BorderRadius.zero
-                            : BorderRadius.circular(10),
-                        child: RTCVideoView(
-                          _remoteRenderer,
-                          objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
-                        ),
-                      ),
-                    ),
-                  ),
-                  // Remote Status Indicators
-                  Positioned(
-                    bottom: 8,
-                    right: 8,
-                    child: Row(
-                      children: [
-                        // Remote Video Status
-                        Container(
-                          padding: EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color: Colors.black54,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Icon(
-                            _remoteVideoOn ? Icons.videocam : Icons.videocam_off,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                        SizedBox(width: 4),
-                        // Remote Audio Status
-                        Container(
-                          padding: EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color: Colors.black54,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Icon(
-                            _remoteAudioOn ? Icons.mic : Icons.mic_off,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-          // Local Video View (small) when remote is fullscreen
-          if (_isRemoteFullScreen && _localRenderer.srcObject != null)
-            Positioned(
-              top: _remoteViewTop,
-              left: _remoteViewLeft,
-              width: 120,
-              height: 200,
-              child: GestureDetector(
-                onPanUpdate: (details) {
-                  setState(() {
-                    _remoteViewTop += details.delta.dy;
-                    _remoteViewLeft += details.delta.dx;
-                    final screenWidth = MediaQuery.of(context).size.width;
-                    final screenHeight = MediaQuery.of(context).size.height;
-                    const viewWidth = 120.0;
-                    const viewHeight = 200.0;
-                    _remoteViewTop = _remoteViewTop.clamp(
-                        0.0, screenHeight - viewHeight - AppBar().preferredSize.height);
-                    _remoteViewLeft = _remoteViewLeft.clamp(0.0, screenWidth - viewWidth);
-                  });
-                },
-                onTap: () => _toggleFullScreen(true),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: RTCVideoView(
-                      _localRenderer,
-                      objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
-                    ),
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            // Local Video View (shown when not in fullscreen remote mode)
+            if (!_isRemoteFullScreen)
+              Positioned.fill(
+                child: GestureDetector(
+                  onDoubleTap: () => _toggleFullScreen(true),
+                  child: RTCVideoView(
+                    _localRenderer,
+                    objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
                   ),
                 ),
               ),
-            ),
 
-          // Controls
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: _toggleVideo,
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      margin: EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
+            // Remote Video View with Status Indicators
+            if (_remoteRenderer.srcObject != null)
+              Positioned(
+                top: _isRemoteFullScreen ? 0 : _remoteViewTop,
+                left: _isRemoteFullScreen ? 0 : _remoteViewLeft,
+                right: _isRemoteFullScreen ? 0 : null,
+                bottom: _isRemoteFullScreen ? 0 : null,
+                width: _isRemoteFullScreen ? null : 150,
+                height: _isRemoteFullScreen ? null : 200,
+                child: Stack(
+                  children: [
+                    GestureDetector(
+                      onPanUpdate: _isRemoteFullScreen
+                          ? null
+                          : (details) {
+                        setState(() {
+                          _remoteViewTop += details.delta.dy;
+                          _remoteViewLeft += details.delta.dx;
+                          final screenWidth = MediaQuery.of(context).size.width;
+                          final screenHeight = MediaQuery.of(context).size.height;
+                          const viewWidth = 150.0;
+                          const viewHeight = 200.0;
+                          _remoteViewTop = _remoteViewTop.clamp(
+                              0.0, screenHeight - viewHeight - AppBar().preferredSize.height);
+                          _remoteViewLeft = _remoteViewLeft.clamp(0.0, screenWidth - viewWidth);
+                        });
+                      },
+                      onTap: () => _toggleFullScreen(false),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: _isRemoteFullScreen ? null : BorderRadius.circular(10),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: _isRemoteFullScreen
+                              ? BorderRadius.zero
+                              : BorderRadius.circular(10),
+                          child: RTCVideoView(
+                            _remoteRenderer,
+                            objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
+                          ),
+                        ),
                       ),
-                      child: Icon(
-                        _isVideoOn ? Icons.videocam : Icons.videocam_off,
-                        size: 30,
-                        color: Colors.black,
+                    ),
+                    // Remote Status Indicators
+                    Positioned(
+                      bottom: 8,
+                      right: 8,
+                      child: Row(
+                        children: [
+                          // Remote Video Status
+                          Container(
+                            padding: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.black54,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Icon(
+                              _remoteVideoOn ? Icons.videocam : Icons.videocam_off,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                          SizedBox(width: 4),
+                          // Remote Audio Status
+                          Container(
+                            padding: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.black54,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Icon(
+                              _remoteAudioOn ? Icons.mic : Icons.mic_off,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+            // Local Video View (small) when remote is fullscreen
+            if (_isRemoteFullScreen && _localRenderer.srcObject != null)
+              Positioned(
+                top: _remoteViewTop,
+                left: _remoteViewLeft,
+                width: 150,
+                height: 200,
+                child: GestureDetector(
+                  onPanUpdate: (details) {
+                    setState(() {
+                      _remoteViewTop += details.delta.dy;
+                      _remoteViewLeft += details.delta.dx;
+                      final screenWidth = MediaQuery.of(context).size.width;
+                      final screenHeight = MediaQuery.of(context).size.height;
+                      const viewWidth = 150.0;
+                      const viewHeight = 200.0;
+                      _remoteViewTop = _remoteViewTop.clamp(
+                          0.0, screenHeight - viewHeight - AppBar().preferredSize.height);
+                      _remoteViewLeft = _remoteViewLeft.clamp(0.0, screenWidth - viewWidth);
+                    });
+                  },
+                  onTap: () => _toggleFullScreen(true),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: RTCVideoView(
+                        _localRenderer,
+                        objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: _toggleCall,
-                    child: Container(
-                      height: 60,
-                      width: 60,
-                      margin: EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: _remoteId == null ? Colors.greenAccent : Colors.red,
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                      ),
-                      child: Icon(
-                        _remoteId == null ? Icons.call : Icons.phone_disabled,
-                        size: 30,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: _toggleMute,
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      margin: EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: _isMuted ? Colors.grey : Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                      ),
-                      child: Icon(
-                        _isMuted ? Icons.mic_off : Icons.mic,
-                        size: 30,
-                        color: Colors.white,
+                ),
+              ),
+
+            // Controls
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: _toggleVideo,
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        margin: EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                        ),
+                        child: Icon(
+                          _isVideoOn ? Icons.videocam : Icons.videocam_off,
+                          size: 30,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: _toggleCall,
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        margin: EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                          color: _remoteId == null ? Colors.greenAccent : Colors.red,
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                        ),
+                        child: Icon(
+                          _remoteId == null ? Icons.call : Icons.phone_disabled,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: _toggleMute,
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        margin: EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                          color: _isMuted ? Colors.grey : Colors.blue,
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                        ),
+                        child: Icon(
+                          _isMuted ? Icons.mic_off : Icons.mic,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
