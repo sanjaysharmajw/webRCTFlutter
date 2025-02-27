@@ -1,6 +1,10 @@
+import 'dart:async';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +25,8 @@ class VideoCallScreen extends StatefulWidget {
   _VideoCallScreenState createState() => _VideoCallScreenState();
 }
 
-class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingObserver {
+class _VideoCallScreenState extends State<VideoCallScreen>
+    with WidgetsBindingObserver {
   late io.Socket socket;
   final _localRenderer = RTCVideoRenderer();
   final _remoteRenderer = RTCVideoRenderer();
@@ -30,6 +35,8 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
   String? _selfId;
   String? _remoteId;
   List<String> _users = [];
+  dynamic _incomingOffer;
+  Timer? _callTimeoutTimer; // Timer for auto-disconnect
 
   double _remoteViewTop = 8.0;
   double _remoteViewLeft = 8.0;
@@ -37,15 +44,20 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
   bool _isRemoteFullScreen = false;
   bool _isMuted = false;
   bool _isVideoOn = true;
-  // Remote status
+  bool _isFrontCamera = true;
+  bool _isSwitchingCamera = false;
   bool _remoteVideoOn = true;
   bool _remoteAudioOn = true;
+
+  late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     initRenderers();
+    initNotifications();
+    requestPermissions();
     connectToSocket();
     initWebRTC();
   }
@@ -55,8 +67,127 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
     await _remoteRenderer.initialize();
   }
 
+  Future<void> requestPermissions() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.notification,
+      Permission.camera,
+      Permission.microphone,
+    ].request();
+  }
+
+  Future<void> initNotifications() async {
+    _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    const AndroidInitializationSettings initializationSettingsAndroid =
+    AndroidInitializationSettings('@mipmap/ic_launcher');
+    const InitializationSettings initializationSettings =
+    InitializationSettings(android: initializationSettingsAndroid);
+    await _flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) async {
+        if (response.payload == 'incoming_call') {
+          if (response.actionId == 'accept') {
+            print('Accepting call');
+            _cancelCallTimeout(); // Cancel timer when accepting
+            if (_incomingOffer != null) {
+              await handleOffer(_incomingOffer);
+            }
+          } else if (response.actionId == 'decline') {
+            print('Declining call');
+            _cancelCallTimeout(); // Cancel timer when declining
+            if (_remoteId != null) {
+              await endCall();
+            }
+            await _flutterLocalNotificationsPlugin.cancel(0);
+          }
+        }
+      },
+    );
+
+    final AndroidNotificationChannel channel = AndroidNotificationChannel(
+      'call_channel',
+      'Incoming Calls',
+      description: 'Notifications for incoming video calls',
+      importance: Importance.high,
+      playSound: true,
+      showBadge: true,
+      ledColor: Colors.green,
+      sound: RawResourceAndroidNotificationSound('custom_ringtone'),
+      enableVibration: true,
+      vibrationPattern: Int64List.fromList([0, 1000, 500, 1000]),
+    );
+
+    await _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+  }
+
+  Future<void> _showIncomingCallNotification(String callerId) async {
+    AndroidNotificationDetails androidPlatformChannelSpecifics =
+    AndroidNotificationDetails(
+      'call_channel',
+      'Incoming Calls',
+      channelDescription: 'Notifications for incoming video calls',
+      importance: Importance.high,
+      priority: Priority.high,
+      showWhen: false,
+      playSound: true,
+      sound: RawResourceAndroidNotificationSound('custom_ringtone'),
+      enableVibration: true,
+      vibrationPattern: Int64List.fromList([0, 1000, 500, 1000]),
+      ongoing: true,
+      autoCancel: false,
+      actions: [
+        AndroidNotificationAction(
+          'accept',
+          'Accept',
+          titleColor: Colors.green,
+          showsUserInterface: true,
+          icon: DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
+        ),
+        AndroidNotificationAction(
+          'decline',
+          'Decline',
+          titleColor: Colors.red,
+          showsUserInterface: true,
+          icon: DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
+        ),
+      ],
+    );
+
+    NotificationDetails platformChannelSpecifics =
+    NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await _flutterLocalNotificationsPlugin.show(
+      0,
+      'Incoming Call',
+      'Call from $callerId',
+      platformChannelSpecifics,
+      payload: 'incoming_call',
+    );
+
+    // Start timeout timer for unanswered call
+    _startCallTimeout();
+  }
+
+  // Start timer for auto-disconnect
+  void _startCallTimeout() {
+    _cancelCallTimeout(); // Cancel any existing timer
+    _callTimeoutTimer = Timer(Duration(seconds: 15), () async {
+      print('Call timeout - auto disconnecting');
+      await endCall();
+      await _flutterLocalNotificationsPlugin.cancel(0);
+    });
+  }
+
+  // Cancel the timeout timer
+  void _cancelCallTimeout() {
+    _callTimeoutTimer?.cancel();
+    _callTimeoutTimer = null;
+  }
+
   void connectToSocket() {
-    socket = io.io('http://192.168.1.17:3001', <String, dynamic>{
+    socket = io.io('http://192.168.1.15:3001', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });
@@ -78,10 +209,12 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
       setState(() {
         _remoteId = data['from'];
       });
-      await handleOffer(data['offer']);
+      _incomingOffer = data['offer'];
+      await _showIncomingCallNotification(data['from']);
     });
 
     socket.on('callAnswered', (data) async {
+      _cancelCallTimeout(); // Cancel timer when call is answered
       await handleAnswer(data['answer']);
     });
 
@@ -94,10 +227,11 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
     });
 
     socket.on('callEnded', (_) async {
+      _cancelCallTimeout(); // Cancel timer when call ends remotely
       await endCall();
+      await _flutterLocalNotificationsPlugin.cancel(0);
     });
 
-    // Receive remote media status
     socket.on('remoteMediaStatus', (data) {
       setState(() {
         _remoteVideoOn = data['videoOn'];
@@ -114,10 +248,9 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
     };
 
     _peerConnection = await createPeerConnection(config);
-
     _localStream = await navigator.mediaDevices.getUserMedia({
       'audio': true,
-      'video': true,
+      'video': {'facingMode': _isFrontCamera ? 'user' : 'environment'},
     });
     _localRenderer.srcObject = _localStream;
 
@@ -173,6 +306,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
     await _peerConnection?.setRemoteDescription(
       RTCSessionDescription(answer['sdp'], answer['type']),
     );
+    await _flutterLocalNotificationsPlugin.cancel(0);
   }
 
   Future<void> endCall() async {
@@ -201,11 +335,64 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
         _isVideoOn = true;
         _remoteVideoOn = true;
         _remoteAudioOn = true;
+        _isFrontCamera = true;
+        _isSwitchingCamera = false;
+        _incomingOffer = null;
       });
 
       await initWebRTC();
     } catch (e) {
       print('Error ending call: $e');
+    }
+  }
+
+  Future<void> _switchCamera() async {
+    if (_localStream == null || _peerConnection == null) {
+      print('Cannot switch camera: Call not active');
+      return;
+    }
+
+    try {
+      setState(() {
+        _isSwitchingCamera = true;
+      });
+
+      final videoTrack = _localStream!.getVideoTracks().first;
+      final cameras = await Helper.cameras;
+      if (cameras.length < 2) {
+        print('Only one camera available');
+        setState(() {
+          _isSwitchingCamera = false;
+        });
+        return;
+      }
+
+      final newStream = await navigator.mediaDevices.getUserMedia({
+        'audio': true,
+        'video': {'facingMode': _isFrontCamera ? 'environment' : 'user'},
+      });
+
+      final newVideoTrack = newStream.getVideoTracks().first;
+      _localStream!.removeTrack(videoTrack);
+      _localStream!.addTrack(newVideoTrack);
+      _localRenderer.srcObject = _localStream;
+
+      final senders = await _peerConnection!.getSenders();
+      final videoSender =
+      senders.firstWhere((sender) => sender.track?.kind == 'video');
+      await videoSender.replaceTrack(newVideoTrack);
+
+      videoTrack.stop();
+
+      setState(() {
+        _isFrontCamera = !_isFrontCamera;
+        _isSwitchingCamera = false;
+      });
+    } catch (e) {
+      print('Error switching camera: $e');
+      setState(() {
+        _isSwitchingCamera = false;
+      });
     }
   }
 
@@ -237,7 +424,6 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
           track.enabled = !_isMuted;
         });
       }
-      // Send updated status to remote peer
       if (_remoteId != null) {
         socket.emit('mediaStatus', {
           'to': _remoteId,
@@ -256,7 +442,6 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
           track.enabled = _isVideoOn;
         });
       }
-      // Send updated status to remote peer
       if (_remoteId != null) {
         socket.emit('mediaStatus', {
           'to': _remoteId,
@@ -280,6 +465,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
 
   @override
   void dispose() {
+    _cancelCallTimeout();
     WidgetsBinding.instance.removeObserver(this);
     endCall();
     _localRenderer.dispose();
@@ -296,19 +482,28 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
       child: Scaffold(
         body: Stack(
           children: [
-            // Local Video View (shown when not in fullscreen remote mode)
             if (!_isRemoteFullScreen)
               Positioned.fill(
                 child: GestureDetector(
                   onDoubleTap: () => _toggleFullScreen(true),
-                  child: RTCVideoView(
-                    _localRenderer,
-                    objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
+                  child: Stack(
+                    children: [
+                      RTCVideoView(
+                        _localRenderer,
+                        objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
+                      ),
+                      AnimatedOpacity(
+                        opacity: _isSwitchingCamera ? 0.0 : 1.0,
+                        duration: Duration(milliseconds: 300),
+                        child: RTCVideoView(
+                          _localRenderer,
+                          objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-
-            // Remote Video View with Status Indicators
             if (_remoteRenderer.srcObject != null)
               Positioned(
                 top: _isRemoteFullScreen ? 0 : _remoteViewTop,
@@ -326,18 +521,27 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                         setState(() {
                           _remoteViewTop += details.delta.dy;
                           _remoteViewLeft += details.delta.dx;
-                          final screenWidth = MediaQuery.of(context).size.width;
-                          final screenHeight = MediaQuery.of(context).size.height;
+                          final screenWidth =
+                              MediaQuery.of(context).size.width;
+                          final screenHeight =
+                              MediaQuery.of(context).size.height;
                           const viewWidth = 150.0;
                           const viewHeight = 200.0;
-                          _remoteViewTop = _remoteViewTop.clamp(0.0, screenHeight - viewHeight - AppBar().preferredSize.height);
-                          _remoteViewLeft = _remoteViewLeft.clamp(0.0, screenWidth - viewWidth);
+                          _remoteViewTop = _remoteViewTop.clamp(
+                              0.0,
+                              screenHeight -
+                                  viewHeight -
+                                  AppBar().preferredSize.height);
+                          _remoteViewLeft = _remoteViewLeft.clamp(
+                              0.0, screenWidth - viewWidth);
                         });
                       },
                       onTap: () => _toggleFullScreen(false),
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: _isRemoteFullScreen ? null : BorderRadius.circular(10),
+                          borderRadius: _isRemoteFullScreen
+                              ? null
+                              : BorderRadius.circular(10),
                         ),
                         child: ClipRRect(
                           borderRadius: _isRemoteFullScreen
@@ -350,13 +554,11 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                         ),
                       ),
                     ),
-                    // Remote Status Indicators
                     Positioned(
                       bottom: 8,
                       right: 8,
                       child: Row(
                         children: [
-                          // Remote Video Status
                           Container(
                             padding: EdgeInsets.all(4),
                             decoration: BoxDecoration(
@@ -364,13 +566,14 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Icon(
-                              _remoteVideoOn ? Icons.videocam : Icons.videocam_off,
+                              _remoteVideoOn
+                                  ? Icons.videocam
+                                  : Icons.videocam_off,
                               color: Colors.white,
                               size: 20,
                             ),
                           ),
                           SizedBox(width: 4),
-                          // Remote Audio Status
                           Container(
                             padding: EdgeInsets.all(4),
                             decoration: BoxDecoration(
@@ -389,8 +592,6 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                   ],
                 ),
               ),
-
-            // Local Video View (small) when remote is fullscreen
             if (_isRemoteFullScreen && _localRenderer.srcObject != null)
               Positioned(
                 top: _remoteViewTop,
@@ -407,8 +608,10 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                       const viewWidth = 150.0;
                       const viewHeight = 200.0;
                       _remoteViewTop = _remoteViewTop.clamp(
-                          0.0, screenHeight - viewHeight - AppBar().preferredSize.height);
-                      _remoteViewLeft = _remoteViewLeft.clamp(0.0, screenWidth - viewWidth);
+                          0.0,
+                          screenHeight - viewHeight - AppBar().preferredSize.height);
+                      _remoteViewLeft =
+                          _remoteViewLeft.clamp(0.0, screenWidth - viewWidth);
                     });
                   },
                   onTap: () => _toggleFullScreen(true),
@@ -418,16 +621,27 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: RTCVideoView(
-                        _localRenderer,
-                        objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
+                      child: Stack(
+                        children: [
+                          RTCVideoView(
+                            _localRenderer,
+                            objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
+                          ),
+                          AnimatedOpacity(
+                            opacity: _isSwitchingCamera ? 0.0 : 1.0,
+                            duration: Duration(milliseconds: 300),
+                            child: RTCVideoView(
+                              _localRenderer,
+                              objectFit:
+                              RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
-
-            // Controls
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
@@ -455,8 +669,8 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                     InkWell(
                       onTap: _toggleCall,
                       child: Container(
-                        height: 60,
-                        width: 60,
+                        height: 50,
+                        width: 50,
                         margin: EdgeInsets.only(right: 10),
                         decoration: BoxDecoration(
                           color: _remoteId == null ? Colors.greenAccent : Colors.red,
@@ -483,6 +697,34 @@ class _VideoCallScreenState extends State<VideoCallScreen> with WidgetsBindingOb
                           _isMuted ? Icons.mic_off : Icons.mic,
                           size: 30,
                           color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: _isSwitchingCamera ? null : _switchCamera,
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        margin: EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                        ),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Icon(
+                              Icons.flip_camera_android,
+                              size: 30,
+                              color: Colors.black,
+                            ),
+                            if (_isSwitchingCamera)
+                              CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.black),
+                              ),
+                          ],
                         ),
                       ),
                     ),
