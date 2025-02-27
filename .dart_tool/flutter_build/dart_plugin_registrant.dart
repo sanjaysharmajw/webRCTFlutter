@@ -3,7 +3,7 @@
 // This file is generated from template in file `flutter_tools/lib/src/flutter_plugins.dart`.
 //
 
-// @dart = 2.19
+// @dart = 2.18
 
 import 'dart:io'; // flutter_ignore: dart_io_import.
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -12,7 +12,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider_foundation/path_provider_foundation.dart';
 import 'package:flutter_local_notifications_linux/flutter_local_notifications_linux.dart';
 import 'package:path_provider_linux/path_provider_linux.dart';
-import 'package:record_linux/record_linux.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider_foundation/path_provider_foundation.dart';
 import 'package:path_provider_windows/path_provider_windows.dart';
@@ -75,15 +74,6 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`path_provider_linux` threw an error: $err. '
-          'The app may not function as expected until you remove this plugin from pubspec.yaml'
-        );
-      }
-
-      try {
-        RecordLinux.registerWith();
-      } catch (err) {
-        print(
-          '`record_linux` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }
